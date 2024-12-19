@@ -35,8 +35,7 @@ public class ImageClassificationTF {
         //need to pass the classes and size of image
         MyTranslator translator = new MyTranslator(classes,imageSize);
         
-        Criteria<Image , Classifications> criteria =
-        Criteria.builder()
+        Criteria<Image , Classifications> criteria = Criteria.builder()
                 .setTypes(Image.class, Classifications.class)
                 .optModelPath(Paths.get(modelPath))
                 .optTranslator(translator)
@@ -55,7 +54,7 @@ public class ImageClassificationTF {
 //translator need to required parameter like list of classes, image size
 class MyTranslator implements Translator<Image, Classifications> {
     //list of classes
-    private  final List<String> CLASSES;
+    private final List<String> CLASSES;
     private final int imageSize;
 
 

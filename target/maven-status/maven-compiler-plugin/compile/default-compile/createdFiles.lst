@@ -1,0 +1,11 @@
+com\example\util\HelperFunctions.class
+com\example\task\TaskHandler.class
+com\example\App.class
+com\example\task\ImageClassificationTF.class
+com\example\task\TextEmbedding.class
+com\example\task\QuestionAnswering.class
+com\example\task\FillMask.class
+com\example\task\MyTranslator.class
+com\example\task\ObjectDetection.class
+com\example\model\modelHandler.class
+com\example\task\ImageClassification.class

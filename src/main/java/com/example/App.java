@@ -12,9 +12,9 @@ public class App
         try {
             //
             
-            String framework = "tensorflow";//tensorflow or pytorch
-            String task = "image_classificationTF";//image_classification, object_detection,text_embedding
-            String modelPath = "/src/model";//location of the saved model 
+            String framework = "tensorflow";//tensorflow or pytorch or modelzoo
+            String task = "image_classificationtf";//image_classification (modelzoo) || image_classificationtf (load model), object_detection,text_embedding
+            String modelPath = "/src/model";//location of the saved model (for tensorflow & pytorch)
             String inputImage = "src/resources/potato1.jpg";
             
             List<String> classNames = Arrays.asList("Bean", "Carrot", "Potato", "Tomato");//loaded model classes
