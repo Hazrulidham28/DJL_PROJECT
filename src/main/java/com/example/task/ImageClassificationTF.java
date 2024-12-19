@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+import com.example.model.ModelHandler;
 import com.example.util.HelperFunctions;
 
 import ai.djl.MalformedModelException;
@@ -23,30 +24,23 @@ import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
 import ai.djl.translate.TranslatorContext;
 
-public class ImageClassificationTF {
+public class ImageClassificationTF implements Task {
 
-    public Object runTask(List<String> classes,int imageSize,String imgPath) throws IOException, ModelNotFoundException, MalformedModelException, TranslateException {
+    @Override
+    public Object runTask(String specificTask, String framework, String input, String modelPath,List<String> classNames, String text1, String text2, String inputTextMask)throws IOException, ModelNotFoundException, MalformedModelException, TranslateException {
        
-        
-        String url_image = imgPath;
-        Image img = HelperFunctions.loadImage(url_image);
-        var modelPath = "src/resources/model.savedmodel";
+        Image img = HelperFunctions.loadImage(input);
+        // var modelPath = "src/resources/model.savedmodel";
         
         //need to pass the classes and size of image
-        MyTranslator translator = new MyTranslator(classes,imageSize);
-        
-        Criteria<Image , Classifications> criteria = Criteria.builder()
-                .setTypes(Image.class, Classifications.class)
-                .optModelPath(Paths.get(modelPath))
-                .optTranslator(translator)
-                .optProgress(new ProgressBar())
-                .optEngine("TensorFlow")//if the model are tensorflow
-                .build();
-        ZooModel model = criteria.loadModel();
-        Predictor< Image, Classifications> predictor = model.newPredictor();
-        Classifications classifications = predictor.predict(img);
+        MyTranslator translator = new MyTranslator(classNames,224);
 
-        return classifications;
+        
+
+        
+        Predictor<Image, Classifications> predictor = ModelHandler.getInstance().loadModel(modelPath, translator, framework);
+
+        return predictor.predict(img);
     }
 }
 

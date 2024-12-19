@@ -1,28 +1,44 @@
 package com.example.model;
 
+import java.nio.file.Paths;
+
+import ai.djl.inference.Predictor;
+import ai.djl.modality.Classifications;
+import ai.djl.modality.cv.Image;
+import ai.djl.repository.zoo.Criteria;
+import ai.djl.repository.zoo.ZooModel;
+import ai.djl.training.util.ProgressBar;
+import ai.djl.translate.Translator;
 
 //import djl model
 
-public class modelHandler {
+public class ModelHandler {
 
-    //receive parameter such as framework(pytorch/tensorflow), model uploaded model path(if user upload their models)
-    //let say if user uses image classification, user also need to provide the image size as well and image label (category 1, category 2... etc)
-    // public static Model loaModel(String framework,String modelPath, String imgSize, String listofLabel){
-    //     switch (framework.toLowerCase()) {
-    //         case "tensorflow":
-    //             return loadTensorFlowModel(modelPath);
-    //         case "pytorch":
-    //             return loadPyTorchModel(modelPath);
-    //         default:
-    //             throw new IllegalArgumentException("Unsupported framework: " + framework);
-    //     }
-    // }
 
+    private static ModelHandler instance;
+
+    private ModelHandler(){}
+
+    public static ModelHandler getInstance() {
+        if (instance == null) {
+            instance = new ModelHandler();
+        }
+        return instance;
+    }
 
 
     //method load tensorflow model here
+    public Predictor<Image, Classifications> loadModel(String modelPath, Translator translator, String framework) throws Exception {
+        Criteria<Image, Classifications> criteria = Criteria.builder()
+                .setTypes(Image.class, Classifications.class)
+                .optModelPath(Paths.get(modelPath))
+                .optTranslator(translator)
+                .optProgress(new ProgressBar())
+                .optEngine(framework)
+                .build();
 
+        ZooModel<Image, Classifications> model = criteria.loadModel();
+        return model.newPredictor();
+    }    
 
-
-    //method load pytorch model here
 }
