@@ -11,16 +11,12 @@ import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.TranslateException;
 
 public class TextEmbedding {
-        private TextEmbedding() {}
-
 
         //text embedding
         //also can use jinaa embedding model as well
         // djl://ai.djl.huggingface.pytorch/jinaai/jina-embeddings-v2-small-en
 
-    public static void main(String[] args) throws IOException, ModelException, TranslateException {
-        String text1 = "Alif love machine learning and AI";
-        String text2 = "Alif enjoy studying machine learning and AI";
+    public Object runTask(String text1, String text2) throws IOException, ModelException, TranslateException {
 
         Criteria<String, float[]> criteria =
                 Criteria.builder()
@@ -37,13 +33,17 @@ public class TextEmbedding {
             float[] embedding1 = predictor.predict(text1);
             float[] embedding2 = predictor.predict(text2);
 
-                    // Calculate cosine similarity
+            // Calculate cosine similarity
             double similarity = cosineSimilarity(embedding1, embedding2);
-            System.out.println("Similarity: " + similarity);
+
+            String output = "Text 1:"+ text1 + "\n" + "Text 2:"+ text2 + "\n" + similarity;
+
+
+            return output;
             
         }
     }
-            // Method to calculate cosine similarity
+        // Method to calculate cosine similarity
         private static double cosineSimilarity(float[] vector1, float[] vector2) {
             double dotProduct = 0.0;
             double norm1 = 0.0;

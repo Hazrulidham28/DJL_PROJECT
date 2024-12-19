@@ -12,8 +12,8 @@ import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.TranslateException;
 
 public class FillMask {
-    public static void main(String[] args) throws IOException, ModelException, TranslateException {
-        String text = "Hello I'm a [MASK] model.";
+    public Object runTask(String text) throws IOException, ModelException, TranslateException {
+        
 
         Criteria<String, Classifications> criteria =
                 Criteria.builder()
@@ -28,6 +28,7 @@ public class FillMask {
                 Predictor<String, Classifications> predictor = model.newPredictor()) {
             Classifications res = predictor.predict(text);
             System.out.println(res);
+            return res;
         }
     }
 }
