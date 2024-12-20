@@ -12,10 +12,11 @@ public class TaskHandler {
     private TaskHandler(){
 
         taskMap.put("image_classificationtf", new ImageClassificationTF());
-        // taskMap.put("image_classification", new ImageClassification());
-        // taskMap.put("object_detection", new ObjectDetection());
-        // taskMap.put("text_similarity", new TextEmbedding());
+        taskMap.put("image_classification", new ImageClassification());
+        taskMap.put("text_embedding", new TextEmbedding());
         // taskMap.put("fill_mask", new FillMask());
+        // taskMap.put("object_detection", new ObjectDetection());
+
     }
 
     public static TaskHandler getInstance(){
@@ -32,9 +33,9 @@ public class TaskHandler {
 
         Task taskInstance = taskMap.get(lowercased);
 
-        if (taskInstance == null) {
-            throw new IllegalArgumentException("Unsupported task: " + task);
-        }
+        // if (taskInstance == null) {
+        //     throw new IllegalArgumentException("Unsupported task: " + task);
+        // }
         
         return taskInstance.runTask(specific_task, framework, input, modelPath, classNames, text1, text2, inputTextMask);
 

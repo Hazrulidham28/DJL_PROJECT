@@ -2,6 +2,7 @@ package com.example.model;
 
 import java.nio.file.Paths;
 
+import ai.djl.Application;
 import ai.djl.inference.Predictor;
 import ai.djl.modality.Classifications;
 import ai.djl.modality.cv.Image;
@@ -40,5 +41,21 @@ public class ModelHandler {
         ZooModel<Image, Classifications> model = criteria.loadModel();
         return model.newPredictor();
     }    
+
+
+    //load from model zoo
+    //doesnt need translator
+    public Predictor<Image, Classifications> loadModelZoo(String modelPath,String framework) throws Exception {
+        Criteria<Image, Classifications> criteria = Criteria.builder()
+                .optApplication(Application.CV.IMAGE_CLASSIFICATION)
+                .setTypes(Image.class, Classifications.class)
+                .optModelUrls(modelPath)
+                .optProgress(new ProgressBar())
+                .optEngine(framework)
+                .build();
+
+        ZooModel<Image, Classifications> model = criteria.loadModel();
+        return model.newPredictor();
+    }
 
 }
