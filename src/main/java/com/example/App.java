@@ -31,8 +31,10 @@ public class App
 
 
 
+            //stashed
 
-            
+            //changed test
+
 
             Object result = TaskHandler.getInstance().handleTask(task,specific_task, framework, inputImage, modelPath,classNames,text1,text2,inputTextMask);
             System.out.println(result);
