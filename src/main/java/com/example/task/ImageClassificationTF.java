@@ -1,13 +1,10 @@
 package com.example.task;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 
 import com.example.model.ModelHandler;
 import com.example.util.HelperFunctions;
 
-import ai.djl.MalformedModelException;
 import ai.djl.inference.Predictor;
 import ai.djl.modality.Classifications;
 import ai.djl.modality.cv.Image;
@@ -15,28 +12,20 @@ import ai.djl.modality.cv.util.NDImageUtils;
 import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDList;
 import ai.djl.ndarray.NDManager;
-import ai.djl.repository.zoo.Criteria;
-import ai.djl.repository.zoo.ModelNotFoundException;
-import ai.djl.repository.zoo.ZooModel;
-import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.Batchifier;
-import ai.djl.translate.TranslateException;
 import ai.djl.translate.Translator;
 import ai.djl.translate.TranslatorContext;
 
 public class ImageClassificationTF implements Task {
 
     @Override
-    public Object runTask(String specificTask, String framework, String input, String modelPath,List<String> classNames, String text1, String text2, String inputTextMask)throws IOException, ModelNotFoundException, MalformedModelException, TranslateException {
+    public Object runTask(String specificTask, String framework, String input, String modelPath,List<String> classNames, String text1, String text2, String inputTextMask)throws Exception {
        
         Image img = HelperFunctions.loadImage(input);
         // var modelPath = "src/resources/model.savedmodel";
         
         //need to pass the classes and size of image
         MyTranslator translator = new MyTranslator(classNames,224);
-
-        
-
         
         Predictor<Image, Classifications> predictor = ModelHandler.getInstance().loadModel(modelPath, translator, framework);
 

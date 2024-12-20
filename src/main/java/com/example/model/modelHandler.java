@@ -28,7 +28,7 @@ public class ModelHandler {
 
 
     //method load tensorflow model here
-    public Predictor<Image, Classifications> loadModel(String modelPath, Translator translator, String framework) throws Exception {
+    public Predictor<Image, Classifications> loadModel(String modelPath, Translator <Image, Classifications> translator, String framework) throws Exception {
         Criteria<Image, Classifications> criteria = Criteria.builder()
                 .setTypes(Image.class, Classifications.class)
                 .optModelPath(Paths.get(modelPath))

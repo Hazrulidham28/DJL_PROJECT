@@ -12,10 +12,10 @@ public class TaskHandler {
     private TaskHandler(){
 
         taskMap.put("image_classificationtf", new ImageClassificationTF());
-        taskMap.put("image_classification", new ImageClassification());
-        taskMap.put("object_detection", new ObjectDetection());
-        taskMap.put("text_similarity", new TextEmbedding());
-        taskMap.put("fill_mask", new FillMask());
+        // taskMap.put("image_classification", new ImageClassification());
+        // taskMap.put("object_detection", new ObjectDetection());
+        // taskMap.put("text_similarity", new TextEmbedding());
+        // taskMap.put("fill_mask", new FillMask());
     }
 
     public static TaskHandler getInstance(){
@@ -26,7 +26,7 @@ public class TaskHandler {
     }
 
 
-    public static Object handleTask(String task,String specific_task, String framework, String input, String modelPath, List<String> classNames,String text1, String text2, String inputTextMask) throws Exception {
+    public Object handleTask(String task,String specific_task, String framework, String input, String modelPath, List<String> classNames,String text1, String text2, String inputTextMask) throws Exception {
         String lowercased = task.toLowerCase();
         
 
