@@ -2,6 +2,8 @@ package com.example.model;
 
 import java.util.List;
 
+
+//model for input
 public class TaskInputs {
     private final String framework;
     private final String task;

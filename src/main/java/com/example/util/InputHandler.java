@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.example.model.TaskInputs;
 
+
+//input output at terminal
 public class InputHandler {
 
     public static TaskInputs getUserInputs() {

@@ -11,6 +11,8 @@ public class TaskHandler {
     
     private TaskHandler(){
 
+        //used hashmap instead of if-else
+        //more readable 
         taskMap.put("image_classificationtf", new ImageClassificationTF());
         taskMap.put("image_classification", new ImageClassification());
         taskMap.put("text_embedding", new TextEmbedding());
@@ -19,6 +21,7 @@ public class TaskHandler {
 
     }
 
+    //intialize instance
     public static TaskHandler getInstance(){
         if(instance == null){
             instance = new TaskHandler();
@@ -33,6 +36,9 @@ public class TaskHandler {
         
         Task taskInstance;
         taskInstance = taskMap.get(lowercasedTask);
+
+        //currently text has specific task
+        //need to filter and instantiate the taskmap
         if (lowercasedTask.equals("text_embedding")) {
 
             if(specific_task.equals("text_embedding")){
