@@ -6,6 +6,7 @@ import ai.djl.Application;
 import ai.djl.inference.Predictor;
 import ai.djl.modality.Classifications;
 import ai.djl.modality.cv.Image;
+import ai.djl.modality.cv.output.DetectedObjects;
 import ai.djl.repository.zoo.Criteria;
 import ai.djl.repository.zoo.ZooModel;
 import ai.djl.training.util.ProgressBar;
@@ -28,7 +29,8 @@ public class ModelHandler {
     }
 
 
-    //method load tensorflow model here
+    //method load tensorflow/pytorch model here
+    //for image classification
     public Predictor<Image, Classifications> loadModel(String modelPath, Translator <Image, Classifications> translator, String framework) throws Exception {
         Criteria<Image, Classifications> criteria = Criteria.builder()
                 .setTypes(Image.class, Classifications.class)
@@ -43,7 +45,7 @@ public class ModelHandler {
     }    
 
 
-    //load from model zoo
+    //image classification (DJL)
     //doesnt need translator
     public Predictor<Image, Classifications> loadModelZoo(String modelPath,String framework) throws Exception {
         Criteria<Image, Classifications> criteria = Criteria.builder()
@@ -55,6 +57,20 @@ public class ModelHandler {
                 .build();
 
         ZooModel<Image, Classifications> model = criteria.loadModel();
+        return model.newPredictor();
+    }
+
+    //object detection (DJL)
+    public Predictor<Image, DetectedObjects> loadObjectDetection(String modelPath,String framework) throws Exception {
+        Criteria<Image, DetectedObjects> criteria = Criteria.builder()
+                .optApplication(Application.CV.OBJECT_DETECTION)
+                .setTypes(Image.class, DetectedObjects.class)
+                .optArgument("threshold", 0.5) // Confidence threshold
+                .optEngine("PyTorch") // Use PyTorch as the engine
+                .optProgress(new ProgressBar())
+                .build();
+
+        ZooModel<Image, DetectedObjects> model = criteria.loadModel();
         return model.newPredictor();
     }
 

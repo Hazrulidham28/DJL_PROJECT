@@ -7,7 +7,7 @@ import java.util.Map;
 public class TaskHandler {
 
     private static TaskHandler instance;
-    private final Map<String,Task> taskMap = new HashMap();
+    private final Map<String,Task> taskMap = new HashMap<>();
     
     private TaskHandler(){
 
@@ -15,7 +15,7 @@ public class TaskHandler {
         taskMap.put("image_classification", new ImageClassification());
         taskMap.put("text_embedding", new TextEmbedding());
         taskMap.put("fill_mask", new FillMask());
-        // taskMap.put("object_detection", new ObjectDetection());
+        taskMap.put("object_detection", new ObjectDetection());
 
     }
 
@@ -48,10 +48,13 @@ public class TaskHandler {
         }
         
 
-        // if (taskInstance == null) {
-        //     throw new IllegalArgumentException("Unsupported task: " + task);
-        // }
+        if (taskInstance == null) {
+            throw new IllegalArgumentException("Unsupported task: " + task);
+        }
         
+        //could use overloading method
+        //need to remove interface class?
+
         return taskInstance.runTask(specific_task, framework, input, modelPath, classNames, text1, text2, inputTextMask);
 
 }

@@ -26,7 +26,10 @@ public class InputHandler {
             case 2 -> "image_classificationtf";
             case 3 -> "object_detection";
             case 4 -> "text_embedding";
-            default -> throw new IllegalArgumentException("Invalid task choice");
+            default ->  {
+                scanner.close();
+                throw new IllegalArgumentException("Invalid task choice");
+            }
         };
 
         // Framework selection
@@ -40,7 +43,10 @@ public class InputHandler {
             case 1 -> "TensorFlow";
             case 2 -> "PyTorch";
             case 3 -> "modelzoo";
-            default -> throw new IllegalArgumentException("Invalid framework choice");
+            default -> {
+                scanner.close();
+                throw new IllegalArgumentException("Invalid task choice");
+            }
         };
 
         String specificTask = "";
@@ -53,7 +59,10 @@ public class InputHandler {
             specificTask = switch (specificTaskChoice) {
                 case 1 -> "text_similarity";
                 case 2 -> "fill_mask";
-                default -> throw new IllegalArgumentException("Invalid specific task choice");
+                default ->  {
+                    scanner.close();
+                    throw new IllegalArgumentException("Invalid task choice");
+                }
             };
         }
 
@@ -65,7 +74,7 @@ public class InputHandler {
 
         String inputImage = "";
         List<String> classNames = null;
-        if (task.equals("image_classification") || task.equals("image_classificationtf")) {
+        if (task.equals("image_classification") || task.equals("image_classificationtf") || task.equals("object_detection")) {
             System.out.println("Enter the input image path (e.g., src/resources/potato1.jpg):");
             inputImage = scanner.nextLine();
 

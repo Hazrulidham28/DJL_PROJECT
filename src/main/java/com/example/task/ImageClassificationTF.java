@@ -22,9 +22,6 @@ public class ImageClassificationTF implements Task {
     public Object runTask(String specificTask, String framework, String input, String modelPath,List<String> classNames, String text1, String text2, String inputTextMask)throws Exception {
        
         Image img = HelperFunctions.loadImage(input);
-        // var modelPath = "src/resources/model.savedmodel";
-        
-        //need to pass the classes and size of image
         MyTranslator translator = new MyTranslator(classNames,224);
         
         Predictor<Image, Classifications> predictor = ModelHandler.getInstance().loadModel(modelPath, translator, framework);
