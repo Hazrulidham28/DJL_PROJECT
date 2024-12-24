@@ -27,7 +27,7 @@ public class FillMask implements Task{
         try (ZooModel<String, Classifications> model = criteria.loadModel();
                 Predictor<String, Classifications> predictor = model.newPredictor()) {
             Classifications res = predictor.predict(inputTextMask);
-            System.out.println(res);
+            // System.out.println(res);
             return res;
         }
     }

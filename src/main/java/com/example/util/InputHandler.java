@@ -13,8 +13,6 @@ public class InputHandler {
     public static TaskInputs getUserInputs() {
         Scanner scanner = new Scanner(System.in);
 
-
-
         // Task selection
         System.out.println("Select the task:");
         System.out.println("1. Image Classification (Model Zoo)");

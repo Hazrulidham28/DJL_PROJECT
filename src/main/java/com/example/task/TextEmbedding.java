@@ -13,8 +13,7 @@ public class TextEmbedding implements Task{
         //text embedding
         //also can use jinaa embedding model as well
         // djl://ai.djl.huggingface.pytorch/jinaai/jina-embeddings-v2-small-en
-        // ai.djl.huggingface.rust/sentence-transformers/all-MiniLM-L6-v2/0.0.1/all-MiniLM-L6-v2 
-        // djl://ai.djl.huggingface.pytorch/sentence-transformers/all-MiniLM-L6-v2
+        
 
         @Override
         public Object runTask(String specificTask, String framework, String input, String modelPath,
